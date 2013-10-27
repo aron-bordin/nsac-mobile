@@ -1,0 +1,5 @@
+app.nsac = {
+	login: function(){
+		
+	}
+};
