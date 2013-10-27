@@ -1,13 +1,14 @@
 app.nsac = {
 	login : function() {
+		console.log("dfdf");
 		var txtMat = $("#Mat");
 		var txtSenha = $("#pass");
 		if (txtMat.val() === "") {
-			alert("Digite o número de matrícula!");
+			navigator.notification.alert("Digite o número de matrícula!", function(){}, "Login");
 			return;
 		}
 		if (txtSenha.val() === "") {
-			alert("Digite a senha!");
+			navigator.notification.alert("Digite a senha!", function(){}, "Login");
 			return;
 		}
 		
@@ -25,24 +26,23 @@ app.nsac = {
 				
 				//testa se server ok
 				if(status !== "success"){
-					alert("Falha ao conectar ao servidor");
+					navigator.notification.alert("Falha ao conectar ao servidor", function(){}, "Login");
 					return;
 				}
 				
 				if(response.search("incorreto!") !== -1){
-					alert("Nome de usuário ou senha incorreto");
+					navigator.notification.alert("Nome de usuário ou senha incorreto", function(){}, "Login");
 					return;
 				}
 				if(response.search("bemvindo") === -1){
-					alert("Falha ao conectar ao servidor");
+					navigator.notification.alert("Falha ao conectar ao servidor", function(){}, "Login");
 					return;
 				}
 				
-				alert("Login ok!");					
+				navigator.notification.alert("Login ok!");					
 			},
 			error : function(data) {
-				alert(2);
-				$("#txt").html(data);
+				//a);
 			}
 		});
 	}
