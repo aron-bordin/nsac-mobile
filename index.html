@@ -18,8 +18,9 @@ Under GLP3
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/config.js"></script>
 		<script type="text/javascript" src="js/lib/chui-3.0.4.js"></script>
-		<script type="text/javascript" src="js/lib/chocolatechip-3.0.4.js"></script>
+		<script type="text/javascript" src="js/lib/jquery-2.0.3.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/nsac/main.js"></script>
 		<script type="text/javascript">
 			app.main.initialize();
 		</script>
@@ -35,7 +36,7 @@ Under GLP3
 						Número de matrícula
 					</p>
 
-					<input type="text" maxlength="20" style="border-radius: 15%"/>
+					<input id="Mat" type="text" maxlength="20" style="border-radius: 15%"/>
 				</div>
 			</li>
 			<li>
@@ -43,12 +44,12 @@ Under GLP3
 					<p style="font-style: italic">
 						Senha
 					</p>
-					<input type="password" maxlength="20" style="border-radius: 15%"/>
+					<input id="pass" type="password" maxlength="20" style="border-radius: 15%"/>
 				</div>
 			</li>
 			<li>
 				<div align="center">
-					<a class='button' style="width: 33%">Login</a>
+					<a class='button' style="width: 33%" onclick="app.nsac.login()">Login</a>
 				</div>
 				
 			</li>
