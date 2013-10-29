@@ -59,13 +59,30 @@ app.nsac = {
 	},
 
 	Notas : "",
+	Ocorrencias : "",
+
+	abrirOcorrencias : function() {
+		var Lista = $("#list");
+		if(app.nsac.Ocorrencias.length < 2){
+			Lista.html("<p>Você não tem nenhume ocorrência :)");
+		} else {
+			Lista.html(app.nsac.Ocorrencias);
+		}
+	},
 
 	abrirBoletim : function() {
 		$.ajax({
 			url : "http://www.cti3.feb.unesp.br/nsac/index.php?pag=boletim",
 			type : "get",
 			success : function(data) {
-				var Lista = $(".list");
+				var Lista = $("#list");
+				var Aux = data; // pra salvar as ocorrencias, ja q vem na msm pag
+				// boletim
+				Aux = Aux.split('<div id="tabs-3">');
+				Aux = Aux[1];
+				Aux = Aux.split('</div>');
+				Aux = Aux[0];
+				app.nsac.Ocorrencias = Aux;
 				data = data.split('id="cboMateria">');
 				data = data[1];
 				data = data.split("</select>");
@@ -74,8 +91,25 @@ app.nsac = {
 				var HTML = "<li><div align='center'> <h3>Selecione a matéria:<h3><select id='cbxMateria'>" + data + "</select>";
 				HTML += "<p></p><a class='button' onclick='app.nsac.carregarNota(1)'>   Carregar nota   </a></div></li><li id='nota'></li>";
 				Lista.html(HTML);
+				app.nsac.inserirMenu();
 
 			}
+		});
+
+	},
+
+	inserirMenu : function() {
+		var Topo = $("#titulo");
+		Topo.html("<h1>NSac Mobile</h1><a class='button' style='float: rigth' id='mostrarMenu' href='javascript:void(null)'>Menu</a>");
+		$.UISheet();
+		$('.sheet').find('section').append("<ul class='list'></li>");
+		$('.sheet .list').append("<li><a class='button' onclick='app.nsac.abrirBoletim()'>Boletim</a></li><li><a class='button' onclick='app.nsac.abrirOcorrencias()'>Ocorrências</a></li><li><a class='button' href='javascript:void(null)'>Cancelar</a></li>");
+		$('.sheet .list').append('<h2 style="text-align: center; margin: 20px;">NSac Mobile</h2>');
+		$("#mostrarMenu").click(function() {
+			$.UIShowSheet();
+		});
+		$('.sheet .list').click(function() {
+			$.UIHideSheet();
 		});
 
 	},
@@ -113,6 +147,7 @@ app.nsac = {
 
 	},
 	carregou : function() {
+
 		if (localStorage.getItem("mat") !== null) {
 			$("#salvar").attr("checked", "checked");
 			$("#Mat").val(localStorage.getItem("mat"));

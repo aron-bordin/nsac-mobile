@@ -11,48 +11,54 @@ Under GLP3
 		<meta name="format-detection" content="telephone=no" />
 		<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-		<link rel="stylesheet" type="text/css" href="css/chui.android-3.0.4.css" />
 		<title>NSac Mobile</title>
 	</head>
 	<body onload="app.nsac.carregou()">
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/config.js"></script>
-		<script type="text/javascript" src="js/lib/chui-3.0.4.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/chui.android-3.0.4.css" />
 		<script type="text/javascript" src="js/lib/jquery-2.0.3.js"></script>
+
+		<script type="text/javascript" src="js/lib/chui-3.0.4.js"></script>
+
 		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="js/nsac/main.js"></script>
 		<script type="text/javascript">
 			app.main.initialize();
 		</script>
-		<ul class="list">
-			<li>
-				<div align="center">
-					<h3>NSac Mobile</h3>
-				</div>
-			</li>
-			<li>
-				<div align="center">
-					<p style="font-style: italic">
-						Número de matrícula
-					</p>
+		<nav id="titulo">
+				<h1>NSac Mobile</h1>
+		</nav>
+		<article>
+			<section>
+				<ul class="list" id="list">
+					<li>
+						<div align="center">
+							<p style="font-style: italic">
+								Número de matrícula
+							</p>
 
-					<input id="Mat" type="text" maxlength="20" style="border-radius: 15%"/>
-					<p><br></p>
-					<p style="font-style: italic">
-						Senha
-					</p>
-					<input id="pass" type="password" maxlength="20" style="border-radius: 15%"/>
-					<br>
-					<input type="checkbox" id="salvar"/>
-					Salvar senha
-				</div>
-			</li>
-			<li>
-				<div align="center">
-					<a class='button' style="width: 33%" onclick="app.nsac.login()">Login</a>
-				</div>
+							<input id="Mat" type="text" maxlength="20" style="border-radius: 15%"/>
+							<p>
+								<br>
+							</p>
+							<p style="font-style: italic">
+								Senha
+							</p>
+							<input id="pass" type="password" maxlength="20" style="border-radius: 15%"/>
+							<br>
+							<input type="checkbox" id="salvar"/>
+							Salvar senha
+						</div>
+					</li>
+					<li>
+						<div align="center">
+							<a class='button' style="width: 33%" onclick="app.nsac.login()">Login</a>
+						</div>
 
-			</li>
-		</ul>
+					</li>
+				</ul>
+			</section>
+		</article>
 	</body>
 </html>
