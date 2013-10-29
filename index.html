@@ -14,7 +14,7 @@ Under GLP3
 		<link rel="stylesheet" type="text/css" href="css/chui.android-3.0.4.css" />
 		<title>NSac Mobile</title>
 	</head>
-	<body>
+	<body onload="app.nsac.carregou()">
 		<script type="text/javascript" src="cordova.js"></script>
 		<script type="text/javascript" src="js/config.js"></script>
 		<script type="text/javascript" src="js/lib/chui-3.0.4.js"></script>
@@ -37,22 +37,21 @@ Under GLP3
 					</p>
 
 					<input id="Mat" type="text" maxlength="20" style="border-radius: 15%"/>
-				</div>
-			</li>
-			<li>
-				<div align="center">
+					<p><br></p>
 					<p style="font-style: italic">
 						Senha
 					</p>
-					<input id="pass" type="password" maxlength="20" style="border-radius: 15%"/><br>
-					<input type="checkbox" id="salvar"/> Salvar senha
+					<input id="pass" type="password" maxlength="20" style="border-radius: 15%"/>
+					<br>
+					<input type="checkbox" id="salvar"/>
+					Salvar senha
 				</div>
 			</li>
 			<li>
 				<div align="center">
 					<a class='button' style="width: 33%" onclick="app.nsac.login()">Login</a>
 				</div>
-				
+
 			</li>
 		</ul>
 	</body>

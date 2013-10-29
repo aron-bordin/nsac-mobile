@@ -1,6 +1,3 @@
-$(document).ready(function() {
-	setTimeout(app.nsac.carregou, 500);
-});
 app.nsac = {
 	login : function() {
 		var txtMat = $("#Mat");
@@ -61,14 +58,56 @@ app.nsac = {
 		});
 	},
 
+	Notas : "",
+
 	abrirBoletim : function() {
 		$.ajax({
 			url : "http://www.cti3.feb.unesp.br/nsac/index.php?pag=boletim",
 			type : "get",
 			success : function(data) {
 				var Lista = $(".list");
-				Lista.html("");
-				Lista.append(data);
+				data = data.split('id="cboMateria">');
+				data = data[1];
+				data = data.split("</select>");
+				data = data[0];
+				//console.log(data);
+				var HTML = "<li><div align='center'> <h3>Selecione a matéria:<h3><select id='cbxMateria'>" + data + "</select>";
+				HTML += "<p></p><a class='button' onclick='app.nsac.carregarNota(1)'>   Carregar nota   </a></div></li><li id='nota'></li>";
+				Lista.html(HTML);
+
+			}
+		});
+
+	},
+
+	carregarNota : function(i) {
+		var Mat = $("#cbxMateria");
+		$.ajax({
+			url : "http://www.cti3.feb.unesp.br/nsac/ajax/carrega_pre_notas.php?pagina_valida='true'&disciplina='" + Mat.val() + "'&bimestre=" + i,
+			type : "get",
+			success : function(data) {
+				if (data.search('localizada') !== -1) {
+					i = 4;
+				} else {
+					data = data.split('&nbsp;</td><td>');
+					data = data[1];
+					data = data.split('</td></tr><tr><td');
+					data = data[0];
+					if (i === 1) {
+						app.nsac.Notas = "<div align='center'>";
+					}
+					app.nsac.Notas += "<p> " + i + "º Bimestre: " + data + "<p>";
+				}
+				if (i === 4) {
+					app.nsac.Notas += ("</div>");
+					console.log(app.nsac.Notas);
+					$("#nota").html(app.nsac.Notas);
+				} else {
+					app.nsac.carregarNota(i + 1);
+				}
+			},
+			error : function(data) {
+				console.log(data);
 			}
 		});
 
