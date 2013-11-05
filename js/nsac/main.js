@@ -18,6 +18,7 @@ app.nsac = {
 			url : "http://www.cti3.feb.unesp.br/nsac/verifica_login.php",
 			type : "POST",
 			data : Data,
+			timeout : 5000,
 			success : function(response, status, request) {
 				console.log(response);
 				console.log(status);
@@ -75,6 +76,11 @@ app.nsac = {
 		$.ajax({
 			url : "http://www.cti3.feb.unesp.br/nsac/index.php?pag=boletim",
 			type : "get",
+			timeout : 5000,
+			error : function(data) {
+				navigator.notification.alert("Falha ao se conectar ao servidor!. Verifique sua conexão", function() {
+				}, "Falha");
+			},
 			success : function(data) {
 				var Lista = $("#list");
 				var Aux = data;
@@ -121,6 +127,7 @@ app.nsac = {
 		$.ajax({
 			url : "http://www.cti3.feb.unesp.br/nsac/ajax/carrega_pre_notas.php?pagina_valida='true'&disciplina='" + Mat.val() + "'&bimestre=" + i,
 			type : "get",
+			timeout : 5000,
 			success : function(data) {
 				if (data.search('localizada') !== -1) {
 					i = 4;
@@ -143,7 +150,8 @@ app.nsac = {
 				}
 			},
 			error : function(data) {
-				console.log(data);
+				navigator.notification.alert("Falha ao se conectar ao servidor!. Verifique sua conexão", function() {
+				}, "Falha");
 			}
 		});
 
@@ -183,6 +191,7 @@ app.nsac = {
 		$.ajax({
 			url : "http://www.cti3.feb.unesp.br/nsac/index.php?pag=confirma_dados",
 			type : "get",
+			timeout: 5000,
 			success : function(data) {
 
 				data = data.split('<table style="text-align:left;" cellspacing="10">');
@@ -193,7 +202,8 @@ app.nsac = {
 				console.log(data);
 			},
 			error : function() {
-				console.error("Erro");
+				navigator.notification.alert("Falha ao se conectar ao servidor!. Verifique sua conexão", function() {
+				}, "Falha");
 			}
 		});
 	}
