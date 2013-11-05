@@ -1,0 +1,14 @@
+#titulo{
+	background-color: #0099CC;
+}
+
+.login li{
+	border-radius: 10%;
+	border-color: blue;
+}
+
+.button{
+	border-radius: 5% 25%;
+
+}
+
