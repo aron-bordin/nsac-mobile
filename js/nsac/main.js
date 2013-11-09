@@ -78,7 +78,7 @@ app.nsac = {
 			type : "get",
 			timeout : 5000,
 			error : function(data) {
-				navigator.notification.alert("Falha ao se conectar ao servidor!. Verifique sua conexão", function() {
+				navigator.notification.alert("Falha ao se conectar ao servidor! Verifique sua conexão", function() {
 				}, "Falha");
 			},
 			success : function(data) {
@@ -124,6 +124,7 @@ app.nsac = {
 
 	carregarNota : function(i) {
 		var Mat = $("#cbxMateria");
+		$("#nota").html("<div align='center'><h2>Carregando...</h2></div>");
 		$.ajax({
 			url : "http://www.cti3.feb.unesp.br/nsac/ajax/carrega_pre_notas.php?pagina_valida='true'&disciplina='" + Mat.val() + "'&bimestre=" + i,
 			type : "get",
@@ -150,7 +151,7 @@ app.nsac = {
 				}
 			},
 			error : function(data) {
-				navigator.notification.alert("Falha ao se conectar ao servidor!. Verifique sua conexão", function() {
+				navigator.notification.alert("Falha ao se conectar ao servidor! Verifique sua conexão", function() {
 				}, "Falha");
 			}
 		});
@@ -173,14 +174,14 @@ app.nsac = {
 		Html += "<p> Aron Barreira Bordin </p>";
 		Html += "<p><a href='mailto:aron.bordin@gmail.com'>aron.bordin@gmail.com</a></p>";
 		Html += "<p> Versão 1.0 - Aluno </p>";
-		Html += "<p> Última atualização: 06/09/2013 </p>";
+		Html += "<p> Última atualização: 10/09/2013 </p>";
 		Html += "</li>";
 		Html += "<li> <h2> Licença </h2> ";
 		Html += "<p> Projeto de código aberto sobre licença GPLv3.0</p>";
 		Html += "<a href='http://www.gnu.org/licenses/gpl.html'> Ler a licença </a><li>";
 		Html += "<li> <h2> Contribuição </h2>";
 		Html += "<p> Por ser um projeto de código aberto, todo o código esta disponível para Download e estudo.<p>";
-		Html += "<p> Caso se interesse em colaborar com o desenvolvimento(programando, sugestões, testar versões betas, informar bugs, etc), entre em contato via e-mail, Facebook, Skype, Telepatia, ...<br> E assim por diante.</p>";
+		Html += "<p> Caso se interesse em colaborar com o desenvolvimento(programando, sugestões, testar versões betas, informar bugs, etc), entre em contato via e-mail, Facebook, Skype, telepatia, ...<br> E assim por diante.</p>";
 		Html += "<p> Como dito logo acima, você pode fazer o Download do código e se divertir acessando: <a href='https://github.com/aron-bordin/nsac-mobile'>https://github.com/aron-bordin/nsac-mobile</a></p>";
 		Html += "<p> Nos vemos pela rede. T++</p></li></div>";
 
@@ -202,7 +203,7 @@ app.nsac = {
 				console.log(data);
 			},
 			error : function() {
-				navigator.notification.alert("Falha ao se conectar ao servidor!. Verifique sua conexão", function() {
+				navigator.notification.alert("Falha ao se conectar ao servidor! Verifique sua conexão", function() {
 				}, "Falha");
 			}
 		});
