@@ -13,20 +13,29 @@ app.nsac = {
 			return;
 		}
 
-		Data = "txtMat=" + txtMat.val() + " &txtSenha=" + txtSenha.val() + "&inputsubmit1=+++Logar+++&pagina=login";
+		Data = "txtMat=" + txtMat.val() + "&txtSenha=" + txtSenha.val() + "&inputsubmit1=+++Logar+++&pagina=login";
 		$.ajax({
 			url : "http://www.cti3.feb.unesp.br/nsac/verifica_login.php",
 			type : "POST",
 			data : Data,
 			timeout : 5000,
-			success : function(response, status, request) {
-				console.log(response);
-				console.log(status);
-				var header = request.getAllResponseHeaders();
-				var match = header.match(/(Set-Cookie|set-cookie): (.+?);/);
-				if (match) {
-				}
+			success : function() {
+				console.log("Login");
+				setTimeout(app.nsac.loginCompleto, 100);
+			},
+		});
 
+	},
+
+	loginCompleto : function() {
+		var txtMat = $("#Mat");
+		var txtSenha = $("#pass");
+		$.ajax({
+
+			url : "http://www.cti3.feb.unesp.br/nsac/index.php",
+			type : "get",
+			timeout : 5000,
+			success : function(response, status, request) {
 				//testa se server ok
 				if (status !== "success") {
 					navigator.notification.alert("Falha ao conectar ao servidor", function() {
@@ -34,12 +43,12 @@ app.nsac = {
 					return;
 				}
 
-				if (response.search("incorreto!") !== -1) {
+				if (response.search("Esqueceu sua senha") !== -1) {
 					navigator.notification.alert("Nome de usuário ou senha incorreto", function() {
 					}, "Login");
 					return;
 				}
-				if (response.search("bemvindo") === -1) {
+				if (response.search("Seja Bem-Vindo") === -1) {
 					navigator.notification.alert("Falha ao conectar ao servidor", function() {
 					}, "Login");
 					return;
@@ -133,14 +142,18 @@ app.nsac = {
 				if (data.search('localizada') !== -1) {
 					i = 4;
 				} else {
-					data = data.split('&nbsp;</td><td>');
-					data = data[1];
-					data = data.split('</td></tr><tr><td');
-					data = data[0];
-					if (i === 1) {
-						app.nsac.Notas = "<div align='center'>";
+					if (data.search("&nbsp;</td><td>") === -1) {
+						i = 4;
+					} else {
+						data = data.split('&nbsp;</td><td>');
+						data = data[1];
+						data = data.split('</td></tr><tr><td');
+						data = data[0];
+						if (i === 1) {
+							app.nsac.Notas = "<div align='center'>";
+						}
+						app.nsac.Notas += "<p> " + i + "º Bimestre: " + data + "<p>";
 					}
-					app.nsac.Notas += "<p> " + i + "º Bimestre: " + data + "<p>";
 				}
 				if (i === 4) {
 					app.nsac.Notas += ("</div>");
@@ -192,7 +205,7 @@ app.nsac = {
 		$.ajax({
 			url : "http://www.cti3.feb.unesp.br/nsac/index.php?pag=confirma_dados",
 			type : "get",
-			timeout: 5000,
+			timeout : 5000,
 			success : function(data) {
 
 				data = data.split('<table style="text-align:left;" cellspacing="10">');
