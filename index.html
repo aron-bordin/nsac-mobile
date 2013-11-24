@@ -28,56 +28,80 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
 		<title>NSac Mobile</title>
+
 	</head>
-	<body onload="app.nsac.carregou()">
+	<body class="light" onload="app.nsac.carregou()">
 		<script type="text/javascript" src="phonegap.js"></script>
 		<script type="text/javascript" src="js/config.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/chui.android-3.0.4.css" />
+		<link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/slicknav.css" />
 		<link rel="stylesheet" type="text/css" href="css/nsac.css"/>
 
 		<script type="text/javascript" src="js/lib/jquery-2.0.3.js"></script>
-
-		<script type="text/javascript" src="js/lib/chui-3.0.4.js"></script>
-
+		<script type="text/javascript" src="js/lib/jquery.slicknav.min.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="js/nsac/main.js"></script>
 		<script type="text/javascript">
 			app.main.initialize();
 		</script>
-		<nav id="titulo">
-			<h1>NSac Mobile</h1>
-		</nav>
-		<article class="login">
-			<section>
-				<ul class="list" id="list">
-					<li class="login">
-						<div align="center">
-							<p style="font-style: italic">
-								Número de matrícula
-							</p>
+		<div class="topcoat-navigation-bar">
+			<div class="topcoat-navigation-bar__item center full">
+				<h1 class="topcoat-navigation-bar__title">NSac Mobile</h1>
+			</div>
+		</div>
+		<div class="topcoat-list">
+			<div align="center">
+				<h3 class="topcoat-list__header" id="titulo">Login</h3>
+			</div>
+			<ul class="topcoat-list__container" id="list">
+				<li class="topcoat-list__item">
+					<div align="center">
+						Número de matrícula
+						<br>
 
-							<input id="Mat" type="text" maxlength="20" style="border-radius: 15%"/>
-							<p>
-								<br>
-							</p>
-							<p style="font-style: italic">
-								Senha
-							</p>
-							<input id="pass" type="password" maxlength="20" style="border-radius: 15%"/>
-							<br>
-							<input type="checkbox" id="salvar"/>
-							Salvar senha
-						</div>
-					</li>
-					<li>
-						<div align="center">
-							<a class='button' style="width: 33%" onclick="app.nsac.login()">Login</a>
+						<input id="Mat" type="text"  class="topcoat-text-input full" placeholder="Número de matrícula"/>
 
-						</div>
+						<p></p>
 
-					</li>
-				</ul>
-			</section>
-		</article>
+						Senha
+						<br>
+						<input id="pass" type="password"  class="topcoat-text-input full" placeholder="Senha"/>
+						<p></p>
+					</div>
+				</li>
+				<li class="topcoat-list__item">
+					<label class="topcoat-checkbox full" >
+						<input type="checkbox" id="salvar"/>
+						<div class="topcoat-checkbox__checkmark" >
+
+						</div> Salvar dados</label>
+					<p></p>
+
+					<button class='topcoat-button--cta full'  onclick="app.nsac.login()">
+						Login
+					</button>
+				</li>
+
+			</ul>
+		</div>
+
+		<ul id="menu">
+			<li>
+				<a href="#" onclick="app.nsac.BoletimCompleto()">Boletim</a>
+			</li>
+			<li>
+				<a href="#" onclick="app.nsac.abrirBoletim()">Matéria</a>
+			</li>
+			<li>
+				<a href="#" onclick="app.nsac.abrirOcorrencias()">Ocorrências</a>
+			</li>
+			<li>
+				<a href="#" onclick="app.nsac.sobre()">Sobre</a>
+			</li>
+			<li>
+				<a href="#" onclick="app.nsac.sair()">Sair</a>
+			</li>
+		</ul>
+
 	</body>
 </html>

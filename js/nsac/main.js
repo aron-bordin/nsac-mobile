@@ -27,11 +27,30 @@ app.nsac = {
 
 	},
 
+	BoletimCompleto : function() {
+		$.ajax({
+			url : "http://www.cti3.feb.unesp.br/nsac/comum/imprimir_boletim.php",
+			type : "get",
+			timeout : 5000,
+			success : function(data) {
+				aux = data.split("</head>")[0];
+				data = data.split("<table ")[1];
+				data = aux + "</head><table " + data;
+				data = data.split("<table>")[0];
+				console.log(data);
+
+				$("#list").html(data);
+			},
+			error : function(er) {
+				console.log(er);
+			}
+		});
+	},
+
 	loginCompleto : function() {
 		var txtMat = $("#Mat");
 		var txtSenha = $("#pass");
 		$.ajax({
-
 			url : "http://www.cti3.feb.unesp.br/nsac/index.php",
 			type : "get",
 			timeout : 5000,
@@ -59,6 +78,9 @@ app.nsac = {
 				} else {
 					localStorage.clear();
 				}
+				$(".topcoat-navigation-bar").css("display", "none");
+				$("#list").html("<li topcoat-list__item> <div align='center' <h2> Carregando ... </h2></div></li>");
+				app.nsac.inserirMenu();
 				app.nsac.abrirBoletim();
 
 			},
@@ -73,15 +95,21 @@ app.nsac = {
 	Ocorrencias : "",
 
 	abrirOcorrencias : function() {
+		$("#titulo").html("Ocorrências");
 		var Lista = $("#list");
 		if (app.nsac.Ocorrencias.length < 2) {
-			Lista.html("<p>Você não tem nenhume ocorrência :)");
+			Lista.html("<li class='topcoat-list__item'><p>Você não tem nenhume ocorrência :)</li>");
 		} else {
-			Lista.html(app.nsac.Ocorrencias);
+			app.nsac.Ocorrencias = app.nsac.Ocorrencias.replace('<font color="#000000">', "");
+			app.nsac.Ocorrencias = app.nsac.Ocorrencias.replace('</font>', "");
+			console.log(app.nsac.Ocorrencias);
+
+			Lista.html("<li class='topcoat-list__item'>" + app.nsac.Ocorrencias + "</li>");
 		}
 	},
 
 	abrirBoletim : function() {
+		$("#titulo").html("Boletim");
 		$.ajax({
 			url : "http://www.cti3.feb.unesp.br/nsac/index.php?pag=boletim",
 			type : "get",
@@ -105,10 +133,9 @@ app.nsac = {
 				data = data.split("</select>");
 				data = data[0];
 				//console.log(data);
-				var HTML = "<li><div align='center'> <h3>Selecione a matéria:<h3><select id='cbxMateria'>" + data + "</select>";
-				HTML += "<p></p><a class='button' onclick='app.nsac.carregarNota(1)'>   Carregar nota   </a></div></li><li id='nota'></li>";
+				var HTML = "<li class='topcoat-list__item'><div align='center'> <h3>Selecione a matéria:<h3><select id='cbxMateria'>" + data + "</select>";
+				HTML += "<p></p><a class='topcoat-button--cta full' onclick='app.nsac.carregarNota(1)'>   Carregar nota   </a></div></li><li class='topcoat-list__item' id='nota'></li>";
 				Lista.html(HTML);
-				app.nsac.inserirMenu();
 
 			}
 		});
@@ -116,19 +143,15 @@ app.nsac = {
 	},
 
 	inserirMenu : function() {
-		var Topo = $("#titulo");
-		Topo.html("<h1>NSac Mobile</h1><a class='button' style='float: rigth' id='mostrarMenu' href='javascript:void(null)'>Menu</a>");
-		$.UISheet();
-		$('.sheet').find('section').append("<ul class='list'></li>");
-		$('.sheet .list').append("<li><a class='button' onclick='app.nsac.abrirBoletim()'>Boletim</a></li><li><a class='button' onclick='app.nsac.abrirOcorrencias()'>Ocorrências</a></li><li><a class='button' href='index.html'>Logoff</a></li><li><a class='button' onclick='app.nsac.sobre()'> Sobre </a></li><li><a class='button' href='javascript:void(null)'>Cancelar</a></li>");
-		$('.sheet .list').append('<h2 style="text-align: center; margin: 20px;">NSac Mobile</h2>');
-		$("#mostrarMenu").click(function() {
-			$.UIShowSheet();
+		$(function() {
+			$('#menu').slicknav({
+				closeOnClick : true
+			});
 		});
-		$('.sheet .list').click(function() {
-			$.UIHideSheet();
-		});
+	},
 
+	sair : function() {
+		window.location.href = "index.html";
 	},
 
 	carregarNota : function(i) {
@@ -180,19 +203,20 @@ app.nsac = {
 	},
 
 	sobre : function() {
+		$("#titulo").html("Sobre");
 		var Lista = $("#list");
 		var Html = "";
-		Html += "<div align='center' ><li><h1> NSac Mobile </h1></li>";
-		Html += "<li><h2> Desenvolvimento </h2>";
+		Html += "<div align='center' ><li class='topcoat-list__item'><h1> NSac Mobile </h1></li>";
+		Html += "<li class='topcoat-list__item'><h2> Desenvolvimento </h2>";
 		Html += "<p> Aron Barreira Bordin </p>";
 		Html += "<p><a href='mailto:aron.bordin@gmail.com'>aron.bordin@gmail.com</a></p>";
-		Html += "<p> Versão 1.0 - Aluno </p>";
-		Html += "<p> Última atualização: 10/09/2013 </p>";
+		Html += "<p> Versão 1.1 - Aluno </p>";
+		Html += "<p> Última atualização: 25/11/2013 </p>";
 		Html += "</li>";
-		Html += "<li> <h2> Licença </h2> ";
+		Html += "<li class='topcoat-list__item'> <h2> Licença </h2> ";
 		Html += "<p> Projeto de código aberto sobre licença GPLv3.0</p>";
 		Html += "<a href='http://www.gnu.org/licenses/gpl.html'> Ler a licença </a><li>";
-		Html += "<li> <h2> Contribuição </h2>";
+		Html += "<li class='topcoat-list__item'> <h2> Contribuição </h2>";
 		Html += "<p> Por ser um projeto de código aberto, todo o código esta disponível para Download e estudo.<p>";
 		Html += "<p> Caso se interesse em colaborar com o desenvolvimento(programando, sugestões, testar versões betas, informar bugs, etc), entre em contato via e-mail, Facebook, Skype, telepatia, ...<br> E assim por diante.</p>";
 		Html += "<p> Como dito logo acima, você pode fazer o Download do código e se divertir acessando: <a href='https://github.com/aron-bordin/nsac-mobile'>https://github.com/aron-bordin/nsac-mobile</a></p>";

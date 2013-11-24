@@ -18,6 +18,8 @@
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.vibration" />
 
+    <access origin="*" />
+    
     <feature name="App">
         <param name="android-package" value="org.apache.cordova.App" />
     </feature>
