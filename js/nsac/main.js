@@ -109,7 +109,7 @@ app.nsac = {
 	},
 
 	abrirBoletim : function() {
-		$("#titulo").html("Boletim");
+		$("#titulo").html("Matéria");
 		$.ajax({
 			url : "http://www.cti3.feb.unesp.br/nsac/index.php?pag=boletim",
 			type : "get",
@@ -133,7 +133,7 @@ app.nsac = {
 				data = data.split("</select>");
 				data = data[0];
 				//console.log(data);
-				var HTML = "<li class='topcoat-list__item'><div align='center'> <h3>Selecione a matéria:<h3><select id='cbxMateria'>" + data + "</select>";
+				var HTML = "<li class='topcoat-list__item'><div align='center'>*Abra o boletim completo pelo menu</div></li><li class='topcoat-list__item'><div align='center'> <h3>Selecione a matéria:<h3><select id='cbxMateria'>" + data + "</select>";
 				HTML += "<p></p><a class='topcoat-button--cta full' onclick='app.nsac.carregarNota(1)'>   Carregar nota   </a></div></li><li class='topcoat-list__item' id='nota'></li>";
 				Lista.html(HTML);
 
@@ -211,7 +211,7 @@ app.nsac = {
 		Html += "<p> Aron Barreira Bordin </p>";
 		Html += "<p><a href='mailto:aron.bordin@gmail.com'>aron.bordin@gmail.com</a></p>";
 		Html += "<p> Versão 1.1 - Aluno </p>";
-		Html += "<p> Última atualização: 25/11/2013 </p>";
+		Html += "<p> Última atualização: 26/11/2013 </p>";
 		Html += "</li>";
 		Html += "<li class='topcoat-list__item'> <h2> Licença </h2> ";
 		Html += "<p> Projeto de código aberto sobre licença GPLv3.0</p>";
