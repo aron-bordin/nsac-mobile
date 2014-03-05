@@ -2,3 +2,9 @@
 	background-color: #0099CC;
 }
 
+#ads{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+}
