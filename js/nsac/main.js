@@ -211,7 +211,7 @@ app.nsac = {
 		Html += "<p> Aron Barreira Bordin </p>";
 		Html += "<p><a href='mailto:aron.bordin@gmail.com'>aron.bordin@gmail.com</a></p>";
 		Html += "<p> Versão 1.1 - Aluno </p>";
-		Html += "<p> Última atualização: 26/11/2013 </p>";
+		Html += "<p> Última atualização: 05/03/2014 </p>";
 		Html += "</li>";
 		Html += "<li class='topcoat-list__item'> <h2> Licença </h2> ";
 		Html += "<p> Projeto de código aberto sobre licença GPLv3.0</p>";
